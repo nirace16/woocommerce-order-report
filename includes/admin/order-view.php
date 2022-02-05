@@ -38,18 +38,25 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent-secondary">
                     <div class="tab-pane fade show active" id="pills-last-1-year" role="tabpanel"
-                        aria-labelledby="pills-last-1-year-tab">Last 1 Year
+                        aria-labelledby="pills-last-1-year-tab"><?php order_reports($date = '1year'); ?>
                     </div>
                     <div class="tab-pane fade" id="pills-last-1-month" role="tabpanel"
                         aria-labelledby="pills-last-1-month-tab">
-                        Last 1 month
+                        <?php order_reports($date = '1month'); ?>
                     </div>
                     <div class="tab-pane fade" id="pills-last-1-week" role="tabpanel"
                         aria-labelledby="pills-last-1-week-tab">
-                        Last 1 week
+                        <?php order_reports($date = '1week'); ?>
                     </div>
                     <div class="tab-pane fade" id="pills-custom" role="tabpanel" aria-labelledby="pills-custom-tab">
-                        Custom
+                        <form>
+                            <label for="start">Start date:</label>
+
+                            <input type="date" id="start" name="trip-start">
+                            <label for="start">End date:</label>
+                            <input type="date" id="start" name="trip-start">
+                            <button class='btn-primary'>Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -57,4 +64,3 @@
     </div>
     <!-- </div> -->
 </div>
-

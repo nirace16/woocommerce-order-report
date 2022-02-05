@@ -60,7 +60,10 @@ if (!class_exists('woocommerce_order_report')) {
         {
             wp_enqueue_style('bootstrap4', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', array());
             wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js');
-            wp_enqueue_script('admin-js', ORDER_URL.'includes/assets/js/admin-js.js', array(), ORDER_VERSION);
+            wp_enqueue_script('jquery');
+            wp_enqueue_script('order-js', ORDER_URL.'includes/admin/assets/js/order.js', array(), ORDER_VERSION);
+            // wp_enqueue_style('wor-style', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', array());
+            //wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js');
         }
 
         // Activate Plugin
