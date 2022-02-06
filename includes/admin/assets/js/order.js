@@ -1,7 +1,7 @@
 jQuery(document).ready(function () {
-	var TotalValue = 0;
-	var TotalValueMonth = 0;
-	var TotalValueWeek = 0;
+	let TotalValue = 0;
+	let TotalValueMonth = 0;
+	let TotalValueWeek = 0;
 
 	jQuery("tr #order-total-1year").each(function (index, value) {
 		currentRow = parseFloat(jQuery(this).text());

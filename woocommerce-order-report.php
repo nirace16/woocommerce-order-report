@@ -35,6 +35,7 @@ if (!class_exists('woocommerce_order_report')) {
         public function includes()
         {
             include(ORDER_PATH. 'includes/admin/order-functions.php');
+            include(ORDER_PATH. 'includes/admin/woocommerce-order-healper-functions.php');
         }
 
         //define required constants so that it will be easy later on
@@ -62,8 +63,6 @@ if (!class_exists('woocommerce_order_report')) {
             wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js');
             wp_enqueue_script('jquery');
             wp_enqueue_script('order-js', ORDER_URL.'includes/admin/assets/js/order.js', array(), ORDER_VERSION);
-            // wp_enqueue_style('wor-style', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', array());
-            //wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js');
         }
 
         // Activate Plugin
