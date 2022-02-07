@@ -18,14 +18,23 @@ if (!function_exists('woo_order_report_get_available_payments')) {
     }
 }
 
-if (!function_exists('woo_order_report_get_all_order_status')) {
-    function woo_order_report_get_all_order_status()
+if (!function_exists('wor_get_order_title')) {
+    function wor_get_order_title($orderName)
     {
-        $order_statuses = get_terms('shop_order_status', array( 'hide_empty' => false ));
-        $statuses = array();
-        foreach ($order_statuses as $status) {
-            $statuses[ $status->slug ] = $status->name;
+        if ($orderName == 'processing') {
+            return 'Processing';
+        } elseif ($orderName == 'cancelled') {
+            return 'Cancelled';
+        } elseif ($orderName == 'on-hold') {
+            return 'On hold';
+        } elseif ($orderName == 'completed') {
+            return 'Completed';
+        } elseif ($orderName == 'failed') {
+            return 'Failed';
+        } elseif ($orderName == 'refunded') {
+            return 'Refunded';
+        } elseif ($orderName == 'pending-payment') {
+            return 'Pending payment';
         }
-        return $statuses;
     }
 }

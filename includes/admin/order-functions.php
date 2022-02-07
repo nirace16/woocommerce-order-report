@@ -1,4 +1,4 @@
-o<?php
+<?php
 if (!function_exists('order_reports')) {
     function order_reports($date)
     {
@@ -9,20 +9,34 @@ if (!function_exists('order_reports')) {
         Total : <span id='total-order-<?php echo $date; ?>'></span>
         <div class="col-md-6">Filter
             <?php if (!empty($availablePayment)) { ?>
-            <label for="order-payment-type">Choose Payment Type:</label>
-            <select name="order-payment-type" id="order-payment-type">
+            <label
+                for="order-payment-type-<?php echo $date; ?>">Choose
+                Payment Type:</label>
+            <select name="order-payment-type-<?php echo $date; ?>"
+                id="order-payment-type-<?php echo $date; ?>">
+                <option value="All">All</option>
                 <?php foreach ($availablePayment as $singlePayment) {
-            echo "<option value=$singlePayment->title>$singlePayment->title</option>";
+            ?>
+                <option value="<?php echo $singlePayment->title; ?>">
+                    <?php echo  $singlePayment->title; ?>
+                </option> <?php
         } ?>
             </select>
             <?php } else {
             echo 'Cannot find any available payments';
         } ?>
             <?php if (!empty($orderStatus)) { ?>
-            <label for="order-payment-status">Choose Order Status:</label>
-            <select name="order-payment-status" id="order-payment-status">
+            <label
+                for="order-payment-status-<?php echo $date; ?>">Choose
+                Order Status:</label>
+            <select name="order-payment-status-<?php echo $date; ?>"
+                id="order-payment-status-<?php echo $date; ?>">
+                <option value="All">All</option>
                 <?php  foreach ($orderStatus as $orderStatusSingle) {
-            echo "<option value=$orderStatusSingle>$orderStatusSingle</option>";
+            ?>
+                <option value="<?php echo $orderStatusSingle; ?>">
+                    <?php echo  $orderStatusSingle; ?>
+                </option> <?php
         } ?>
             </select>
             <?php } else {
@@ -30,21 +44,22 @@ if (!function_exists('order_reports')) {
         } ?>
         </div>
     </div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Order ID</th>
-                <th scope="col">Order Name</th>
-                <th scope="col">Order Date</th>
-                <th scope="col">Payment Method</th>
-                <th scope="col">Status</th>
-                <th scope="col">Total</th>
-            </tr>
-        </thead>
-        <tbody>
+</div>
+<table class="table table-striped" id="woocommerce-order-table">
+    <thead>
+        <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Order Name</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Payment Method</th>
+            <th scope="col">Status</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+    <tbody>
 
 
-            <?php
+        <?php
 $today = getdate();
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
         if ($date == "1year") {
@@ -81,29 +96,30 @@ $today = getdate();
         foreach ($orders as $singleOrder) {
             $orderData = $singleOrder->get_data();
             $orderPaymentMethod = $orderData['payment_method']; ?>
-            <tr>
-                <th scope="row"><?php echo $orderData['id']; ?>
-                </th>
-                <td><?php echo $orderData['billing']['first_name'] . ' ' . $orderData['billing']['last_name']; ?>
-                </td>
-                <td><?php echo $orderData['date_created']->date('Y-m-d'); ?>
-                </td>
-                <td
-                    class="<?php echo $orderData['payment_method_title']; ?>">
-                    <?php echo ucwords($orderData['payment_method_title']); ?>
-                </td>
-                <td
-                    class="<?php echo $orderData['status']; ?>">
-                    <?php echo $orderData['status']; ?>
-                </td>
-                <td id="order-total-<?php echo $date; ?>"><?php echo $orderData['total']; ?>
-                </td>
-            </tr>
-            <?php
+        <tr>
+            <th scope="row"><?php echo $orderData['id']; ?>
+            </th>
+            <td><?php echo $orderData['billing']['first_name'] . ' ' . $orderData['billing']['last_name']; ?>
+            </td>
+            <td><?php echo $orderData['date_created']->date('Y-m-d'); ?>
+            </td>
+            <td
+                class="<?php echo $orderData['payment_method_title']; ?>">
+                <?php echo $orderData['payment_method_title']; ?>
+            </td>
+            <td
+                class="<?php echo $orderData['status']; ?>">
+                <?php
+            echo wor_get_order_title($orderData['status']); ?>
+            </td>
+            <td id="order-total-<?php echo $date; ?>"><?php echo $orderData['total']; ?>
+            </td>
+        </tr>
+        <?php
         } ?>
-        </tbody>
-    </table>
-    <?php
+    </tbody>
+</table>
+<?php
     }
 }
 if (!function_exists('order_settings')) {
